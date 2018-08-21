@@ -51,11 +51,11 @@ export default {
   mounted() {
     const date = window.localStorage.getItem('date');
     if (typeof date !== 'undefined' && date !== null) {
-      this.start = new Date(date).getTime();
+      this.start = new Date(date).getTime() + this.timezoneOffset;
       this.end = this.start + 2 * 24 * 60 * 60 * 1000;
     }
     setInterval(() => {
-      this.currentTime = new Date().getTime();
+      this.currentTime = new Date().getTime() + this.timezoneOffset;
       this.realTime = this.currentTime - this.start + this.timezoneOffset;
       this.gameTime = this.realTime / 2 * 3;
     }, 1);
