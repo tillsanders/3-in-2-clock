@@ -1,9 +1,7 @@
 <template>
-  <main>
-    <div class="wrapper">
-      <input type="date" v-model="date">
-    </div>
-  </main>
+  <div>
+    <input type="date" v-model="date">
+  </div>
 </template>
 
 <script>
@@ -27,15 +25,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-  input {
-    outline: none;
-    padding: 1rem;
-    border: none;
-    background: #444;
-    color: #FFF;
-    font-weight: 100;
-    font-size: 4vmax;
-  }
-</style>
