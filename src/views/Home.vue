@@ -108,7 +108,7 @@ export default {
   .clock__realtime {
     display: inline-block;
     position: relative;
-    font-size: 3vmin;
+    font-size: 4vmin;
     color: #555;
   }
   .clock__day,

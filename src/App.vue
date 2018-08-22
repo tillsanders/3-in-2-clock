@@ -28,7 +28,7 @@ export default {
 <style lang="scss">
   body {
     margin: 0;
-    background-color: #222;
+    background-color: #111;
     color: #EEE;
     font-family: monospace;
     font-weight: 100;
@@ -44,10 +44,10 @@ export default {
     padding: 1rem;
     margin: 1rem 0;
     border: none;
-    background: #444;
+    background: #333;
     color: #FFF;
     font-weight: 100;
-    font-size: 4vmax;
+    font-size: 4vmin;
     border-radius: 0;
     appearance: none;
   }
