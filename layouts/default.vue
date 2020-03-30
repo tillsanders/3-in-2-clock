@@ -63,14 +63,18 @@ export default {
     font-size: 4vmin;
     border-radius: 0;
     appearance: none;
+    min-height: 1.4em
   }
 
   select {
     width: 100%;
   }
 
+  html, body, #__nuxt, #__layout, main {
+    height: 100%;
+  }
+
   main {
-    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -90,7 +94,7 @@ export default {
   }
 
   #settings-link {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     padding: 1rem;
@@ -98,7 +102,7 @@ export default {
   }
 
   #calculator-link {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 3rem;
     padding: 1rem;
@@ -106,7 +110,7 @@ export default {
   }
 
   #gitlab-link {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     padding: 1rem;

@@ -138,10 +138,12 @@ export default {
   }
   .clock__day {
     position: absolute;
+    top: 0;
     right: 100%;
   }
   .clock__seconds {
     position: absolute;
+    top: 0;
     left: 100%;
   }
 </style>
