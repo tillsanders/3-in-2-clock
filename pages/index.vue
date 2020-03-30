@@ -106,7 +106,7 @@ export default {
     margin: 0 auto;
   }
   .clock__realtime_toggle {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     padding: 1rem;
