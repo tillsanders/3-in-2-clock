@@ -15,6 +15,9 @@
         </nuxt-link>
       </template>
       <nuxt />
+      <a href="https://gitlab.com/tillsanders/3-in-2-clock">
+        <font-awesome-icon id="gitlab-link" icon="code-branch" fixed-width />
+      </a>
     </div>
   </main>
 </template>
@@ -98,6 +101,14 @@ export default {
     position: absolute;
     top: 0;
     right: 3rem;
+    padding: 1rem;
+    color: #555;
+  }
+
+  #gitlab-link {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     padding: 1rem;
     color: #555;
   }
