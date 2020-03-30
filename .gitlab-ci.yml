@@ -1,26 +1,43 @@
-image: node:9
-
 stages:
+  - compile
   - build
   - deploy
 
-build:
-  stage: build
+variables:
+  CONTAINER_RELEASE_IMAGE_LATEST: registry.gitlab.com/tillsanders/3-in-2-clock:latest
+  CONTAINER_RELEASE_IMAGE_LATEST_ID: registry.gitlab.com/tillsanders/3-in-2-clock:master_$CI_PIPELINE_IID
+
+compile:
+  stage: compile
+  image: node
   script:
-    - npm install
+    - npm ci
     - npm run build
   artifacts:
+    name: "$CI_JOB_NAME"
     paths:
-    - dist/
+    - .nuxt
+    - node_modules
+  environment:
+    name: production
+  only:
+    - master
 
-deploy:production:
-  stage: deploy
+build:
+  stage: build
+  image: docker
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+  - docker:dind
   script:
-    - apt-get update -qq && apt-get install -y -qq lftp
-    - lftp -c "set ftp:ssl-allow no; open -u '${FTP_USER}','${FTP_PASSWORD}' '${FTP_HOST}'; mirror -Rev dist/ /  --ignore-time --parallel=10"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker build --pull -t $CONTAINER_RELEASE_IMAGE_LATEST .
+    - docker push $CONTAINER_RELEASE_IMAGE_LATEST
+    - docker tag $CONTAINER_RELEASE_IMAGE_LATEST $CONTAINER_RELEASE_IMAGE_LATEST_ID
+    - docker push $CONTAINER_RELEASE_IMAGE_LATEST_ID
   environment:
     name: production
     url: https://3-in-2.dpsg-luedenscheid.de
-  when: manual
   only:
     - master
