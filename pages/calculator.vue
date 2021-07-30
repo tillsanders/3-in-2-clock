@@ -1,28 +1,28 @@
 <template>
   <div>
     <template v-if="mode === 'real-to-game'">
-      <label>Echtzeit</label>
+      <label>Real Time</label>
       <select v-model="dayIn">
         <option value="0">
-          Tag 1
+          Day 1
         </option>
         <option value="1">
-          Tag 2
+          Day 2
         </option>
       </select>
       <input v-model="timeIn" type="timeIn" placeholder="SS:MM">
     </template>
     <template v-else-if="mode === 'game-to-real'">
-      <label>Spielzeit</label>
+      <label>Game Time</label>
       <select v-model="dayIn">
         <option value="0">
-          Tag 1
+          Day 1
         </option>
         <option value="1">
-          Tag 2
+          Day 2
         </option>
         <option value="2">
-          Tag 3
+          Day 3
         </option>
       </select>
       <input v-model="timeIn" type="timeIn" placeholder="SS:MM">
@@ -35,11 +35,11 @@
     </div>
 
     <template v-if="mode === 'real-to-game'">
-      <label>Spielzeit</label>
+      <label>Game Time</label>
       <input v-model="timeOut" type="timeOut" disabled>
     </template>
     <template v-else-if="mode === 'game-to-real'">
-      <label>Echtzeit</label>
+      <label>Real Time</label>
       <input v-model="timeOut" type="timeOut" disabled>
     </template>
   </div>
@@ -53,7 +53,7 @@ export default {
       dayIn: 0,
       timeIn: '00:00',
       mode: 'real-to-game',
-      days: ['Tag 1', 'Tag 2', 'Tag 3']
+      days: ['Day 1', 'Day 2', 'Day 3']
     }
   },
   computed: {

@@ -32,17 +32,23 @@
     </template>
     <template v-else-if="start !== null && currentTime < start">
       <div class="clock__empty">
-        BEREIT
+        READY
       </div>
     </template>
     <template v-else-if="start !== null && currentTime > end">
       <div class="clock__empty">
-        ENDE
+        END
       </div>
     </template>
     <template v-else>
       <div class="clock__empty">
         3 in 2
+        <p>
+          Set your start date in the settings and then use the clock to pretend there are 72 hours
+          in&nbsp;48 or 3 days in 2.<br>
+          <br>
+          Sneak an extra day into your life. Use it wisely.
+        </p>
       </div>
     </template>
   </div>
@@ -105,6 +111,14 @@ export default {
     display: inline-block;
     margin: 0 auto;
   }
+  .clock__empty p {
+    font-size: 1rem;
+    text-transform: none;
+    width: 35rem;
+    max-width: 80vw;
+    line-height: 1.5;
+    margin-top: 4rem;
+  }
   .clock__realtime_toggle {
     position: fixed;
     top: 0;
@@ -116,7 +130,7 @@ export default {
   .clock__realtime_wrapper {
     position: absolute;
     right: 0;
-    bottom: 2rem;
+    bottom: 6rem;
     left: 0;
   }
   .clock__realtime {

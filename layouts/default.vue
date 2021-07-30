@@ -20,7 +20,10 @@
         <a href="https://plausible.io/3-in-2.com">Stats</a>
         <a href="https://till-sanders.de/privacy">Privacy</a>
         <a href="https://till-sanders.de/about">Site Notice</a>
-        <a href="https://github.com/tillsanders/3-in-2-clock">
+        <a href="https://twitter.com/tillsanders" title="Visit the author on Twitter">
+          <FontAwesomeIcon :icon="['fab', 'twitter']" fixed-width />
+        </a>
+        <a href="https://github.com/tillsanders/3-in-2-clock" title="Visit on GitHub">
           <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
         </a>
       </div>
@@ -122,7 +125,7 @@ export default {
     bottom: 0;
     right: 0;
     color: #555;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom)) 0.5rem;
     a {
       display: inline-block;
       padding: 0.5rem;
