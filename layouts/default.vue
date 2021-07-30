@@ -122,10 +122,10 @@ export default {
     font-size: 0.65rem;
     display: block;
     position: fixed;
-    bottom: 0;
+    bottom: env(safe-area-inset-bottom, 0);
     right: 0;
     color: #555;
-    padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom)) 0.5rem;
+    padding: 0.5rem;
     a {
       display: inline-block;
       padding: 0.5rem;
