@@ -53,5 +53,6 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v2
         with:
           build_dir: dist
+          fqdn: 3-in-2.com
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
