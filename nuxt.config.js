@@ -4,11 +4,11 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'new',
+    title: '3 in 2',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' },
+      { hid: 'description', name: 'description', content: 'Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -50,6 +50,13 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    meta: {
+      name: '3 in 2',
+      title: '3 in 2',
+      author: 'Till Sanders',
+      description: 'Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.',
+      theme_color: '#000'
     }
   },
 
