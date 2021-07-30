@@ -49,11 +49,13 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'en',
+      name: '3 in 2',
+      short_name: '3 in 2',
+      description: 'Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.',
     },
     meta: {
       name: '3 in 2',
-      title: '3 in 2',
       author: 'Till Sanders',
       description: 'Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.',
       theme_color: '#000'
