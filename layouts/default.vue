@@ -15,9 +15,15 @@
         </nuxt-link>
       </template>
       <nuxt />
-      <a href="https://github.com/tillsanders/3-in-2-clock">
-        <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
-      </a>
+
+      <div id="smallprint">
+        <a href="https://plausible.io/3-in-2.com">Stats</a>
+        <a href="https://till-sanders.de/privacy">Privacy</a>
+        <a href="https://till-sanders.de/about">Site Notice</a>
+        <a href="https://github.com/tillsanders/3-in-2-clock">
+          <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
+        </a>
+      </div>
     </div>
   </main>
 </template>
@@ -109,11 +115,17 @@ export default {
     color: #555;
   }
 
-  #github-link {
+  #smallprint {
+    font-size: 0.65rem;
+    display: block;
     position: fixed;
     bottom: 0;
     right: 0;
-    padding: 1rem;
     color: #555;
+    padding: 0.5rem;
+    a {
+      display: inline-block;
+      padding: 0.5rem;
+    }
   }
 </style>

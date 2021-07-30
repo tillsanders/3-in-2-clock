@@ -43,6 +43,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    'vue-plausible'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -50,6 +51,11 @@ export default {
     manifest: {
       lang: 'en'
     }
+  },
+
+  plausible: {
+    domain: '3-in-2.com',
+    trackLocalhost: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

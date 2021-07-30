@@ -20,7 +20,8 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "vue-plausible": "^1.2.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
