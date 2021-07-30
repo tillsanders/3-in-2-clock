@@ -9,7 +9,7 @@ library.add(
   faCalculator, faCodeBranch, faExchangeAlt, faEye, faEyeSlash, faCog, faTimes
 )
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 // This is important, we are going to let Nuxt.js worry about the CSS
 config.autoAddCss = false

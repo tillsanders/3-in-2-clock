@@ -3,20 +3,20 @@
     <div class="wrapper">
       <template v-if="current === 'index'">
         <nuxt-link to="/settings">
-          <font-awesome-icon id="settings-link" icon="cog" fixed-width />
+          <FontAwesomeIcon id="settings-link" icon="cog" fixed-width />
         </nuxt-link>
         <nuxt-link to="/calculator">
-          <font-awesome-icon id="calculator-link" icon="calculator" fixed-width />
+          <FontAwesomeIcon id="calculator-link" icon="calculator" fixed-width />
         </nuxt-link>
       </template>
       <template v-else>
         <nuxt-link to="/">
-          <font-awesome-icon id="settings-link" icon="times" fixed-width />
+          <FontAwesomeIcon id="settings-link" icon="times" fixed-width />
         </nuxt-link>
       </template>
       <nuxt />
-      <a href="https://gitlab.com/tillsanders/3-in-2-clock">
-        <font-awesome-icon id="gitlab-link" icon="code-branch" fixed-width />
+      <a href="https://github.com/tillsanders/3-in-2-clock">
+        <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
       </a>
     </div>
   </main>
@@ -109,7 +109,7 @@ export default {
     color: #555;
   }
 
-  #gitlab-link {
+  #github-link {
     position: fixed;
     bottom: 0;
     right: 0;

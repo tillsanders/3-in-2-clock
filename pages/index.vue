@@ -13,8 +13,8 @@
         </div>
       </div>
       <div class="clock__realtime_toggle">
-        <font-awesome-icon v-if="realTimeVisible" icon="eye" fixed-width @click="realTimeVisible = false" />
-        <font-awesome-icon v-if="!realTimeVisible" icon="eye-slash" fixed-width @click="realTimeVisible = true" />
+        <FontAwesomeIcon v-if="realTimeVisible" icon="eye" fixed-width @click="realTimeVisible = false" />
+        <FontAwesomeIcon v-if="!realTimeVisible" icon="eye-slash" fixed-width @click="realTimeVisible = true" />
       </div>
       <div class="clock__realtime_wrapper">
         <div v-if="realTimeVisible" class="clock__realtime">

@@ -30,7 +30,7 @@
 
     <div class="calculator__toggle" @click="toggleMode">
       <div class="calculator__toggle_icon" :class="{ 'calculator__toggle_icon--flipped': mode === 'real-to-game' }">
-        <font-awesome-icon icon="exchange-alt" fixed-width />
+        <FontAwesomeIcon icon="exchange-alt" fixed-width />
       </div>
     </div>
 
