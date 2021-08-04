@@ -65,18 +65,18 @@ export default {
       realTimeVisible: false,
       realTime: null, // real time passed, in seconds
       gameTime: null, // pretended time passed, in seconds
-      timezoneOffset: 60 * 60 * 1000
+      timezoneOffset: (new Date).getTimezoneOffset() * 60 * 1000 // milliseconds
     }
   },
   mounted () {
     const date = window.localStorage.getItem('date')
     if (typeof date !== 'undefined' && date !== null) {
-      this.start = new Date(date).getTime() + this.timezoneOffset
+      this.start = new Date(date).getTime()
       this.end = this.start + 2 * 24 * 60 * 60 * 1000
     }
     setInterval(() => {
-      this.currentTime = new Date().getTime() + this.timezoneOffset
-      this.realTime = this.currentTime - this.start + this.timezoneOffset
+      this.currentTime = new Date().getTime() - this.timezoneOffset
+      this.realTime = this.currentTime - this.start
       this.gameTime = this.realTime / 2 * 3
     }, 1)
   },
