@@ -3,7 +3,7 @@
     <template v-if="start !== null && currentTime > start && currentTime <= end">
       <div class="clock__gametime">
         <div class="clock__day">
-          Tag&nbsp;{{ days(gameTime) + 1 }},&nbsp;
+          {{ $t('day') }}&nbsp;{{ days(gameTime) + 1 }},&nbsp;
         </div>
         <div class="clock__hours_minutes">
           {{ format(hours(gameTime)) }}:{{ format(minutes(gameTime)) }}
@@ -12,14 +12,14 @@
           :{{ format(seconds(gameTime)) }}
         </div>
       </div>
-      <div class="clock__realtime_toggle">
+      <button class="clock__realtime_toggle" :title="$t('toggle-realtime-clock')">
         <FontAwesomeIcon v-if="realTimeVisible" icon="eye" fixed-width @click="realTimeVisible = false" />
         <FontAwesomeIcon v-if="!realTimeVisible" icon="eye-slash" fixed-width @click="realTimeVisible = true" />
-      </div>
+      </button>
       <div class="clock__realtime_wrapper">
         <div v-if="realTimeVisible" class="clock__realtime">
           <div class="clock__day">
-            Tag&nbsp;{{ days(realTime) + 1 }},&nbsp;
+            {{ $t('day') }}}&nbsp;{{ days(realTime) + 1 }},&nbsp;
           </div>
           <div class="clock__hours_minutes">
             {{ format(hours(realTime)) }}:{{ format(minutes(realTime)) }}
@@ -32,22 +32,21 @@
     </template>
     <template v-else-if="start !== null && currentTime < start">
       <div class="clock__empty">
-        READY
+        {{ $t('ready') }}
       </div>
     </template>
     <template v-else-if="start !== null && currentTime > end">
       <div class="clock__empty">
-        END
+        {{ $t('end') }}
       </div>
     </template>
     <template v-else>
       <div class="clock__empty">
-        3 in 2
+        {{ $t('3-in-2') }}
         <p>
-          Set your start date in the settings and then use the clock to pretend there are 72 hours
-          in&nbsp;48 or 3 days in 2.<br>
+          {{ $t('introduction-1') }}<br>
           <br>
-          Sneak an extra day into your life. Use it wisely.
+          {{ $t('introduction-2') }}
         </p>
       </div>
     </template>
@@ -103,6 +102,25 @@ export default {
 }
 </script>
 
+<i18n lang="yaml">
+en:
+  3-in-2: "3 in 2"
+  introduction-1: "Set your start date in the settings and then use the clock to pretend there are 72 hours in 48 or 3 days in 2."
+  introduction-2: "Sneak an extra day into your life. Use it wisely."
+  toggle-realtime-clock: "Show real time"
+  day: "Day"
+  ready: "READY"
+  end: "END"
+de:
+  3-in-2: "3 in 2"
+  introduction-1: "Setzt euer Start-Datum in den Einstellungen und beobachtet, wie die Uhr schneller läuft damit ihr 72 Stunden in 48 echten Stunden erleben könnt, oder 3 Tage in 2."
+  introduction-2: "Verschafft euch einen Extra-Tag. Nutzt ihn weise."
+  toggle-realtime-clock: "Zeige echte Zeit"
+  day: "Tag"
+  ready: "BEREIT"
+  end: "ENDE"
+</i18n>
+
 <style lang="scss">
   .clock__gametime, .clock__empty {
     font-size: 7vmin;
@@ -126,6 +144,9 @@ export default {
     padding: 1rem;
     color: #555;
     cursor: pointer;
+    appearance: none;
+    background: transparent;
+    border: 0;
   }
   .clock__realtime_wrapper {
     position: absolute;

@@ -2,7 +2,7 @@
   <div class="settings">
     <input v-model="date" type="date">
     <div class="settings__actions">
-      <button v-if="date" @click="unset"><FontAwesomeIcon icon="trash" /></button>
+      <button v-if="date" @click="unset" :title="$t('unset')"><FontAwesomeIcon icon="trash" /></button>
     </div>
   </div>
 </template>
@@ -36,6 +36,13 @@ export default {
   }
 }
 </script>
+
+<i18n lang="yaml">
+en:
+  unset: "Unset start-date."
+de:
+  unset: "Start-Datum leeren."
+</i18n>
 
 <style lang="scss">
 .settings__actions {

@@ -1,45 +1,45 @@
 <template>
   <div>
     <template v-if="mode === 'real-to-game'">
-      <label>Real Time</label>
+      <label>{{ $t('real-time') }}</label>
       <select v-model="dayIn">
         <option value="0">
-          Day 1
+          {{ $t('day-1') }}
         </option>
         <option value="1">
-          Day 2
+          {{ $t('day-2') }}
         </option>
       </select>
       <input v-model="timeIn" type="timeIn" placeholder="SS:MM">
     </template>
     <template v-else-if="mode === 'game-to-real'">
-      <label>Game Time</label>
+      <label>{{ $t('game-time') }}</label>
       <select v-model="dayIn">
         <option value="0">
-          Day 1
+          {{ $t('day-1') }}
         </option>
         <option value="1">
-          Day 2
+          {{ $t('day-2') }}
         </option>
         <option value="2">
-          Day 3
+          {{ $t('day-3') }}
         </option>
       </select>
       <input v-model="timeIn" type="timeIn" placeholder="SS:MM">
     </template>
 
-    <div class="calculator__toggle" @click="toggleMode">
+    <button class="calculator__toggle" @click="toggleMode" :title="$t('toggle')">
       <div class="calculator__toggle_icon" :class="{ 'calculator__toggle_icon--flipped': mode === 'real-to-game' }">
         <FontAwesomeIcon icon="exchange-alt" fixed-width />
       </div>
-    </div>
+    </button>
 
     <template v-if="mode === 'real-to-game'">
-      <label>Game Time</label>
+      <label>{{ $t('game-time') }}</label>
       <input v-model="timeOut" type="timeOut" disabled>
     </template>
     <template v-else-if="mode === 'game-to-real'">
-      <label>Real Time</label>
+      <label>{{ $t('real-time') }}</label>
       <input v-model="timeOut" type="timeOut" disabled>
     </template>
   </div>
@@ -53,7 +53,7 @@ export default {
       dayIn: 0,
       timeIn: '00:00',
       mode: 'real-to-game',
-      days: ['Day 1', 'Day 2', 'Day 3']
+      days: [this.$t('day-1'), this.$t('day-2'), this.$t('day-3')]
     }
   },
   computed: {
@@ -100,12 +100,34 @@ export default {
 }
 </script>
 
+<i18n lang="yaml">
+en:
+  game-time: "Game Time"
+  real-time: "Real Time"
+  day-1: "Day 1"
+  day-2: "Day 2"
+  day-3: "Day 3"
+  toggle: "Switch conversion direction"
+de:
+  game-time: "Spielzeit"
+  real-time: "Echtzeit"
+  day-1: "Tag 1"
+  day-2: "Tag 2"
+  day-3: "tag 3"
+  toggle: "Umrechnungsrichtung wechseln"
+</i18n>
+
 <style lang="scss">
   .calculator__toggle {
     padding: 2rem 2rem 3rem 2rem;
     font-size: 3vmin;
     cursor: pointer;
-
+    appearance: none;
+    border: 0;
+    background: transparent;
+    display: block;
+    margin: 0 auto;
+    color: currentColor;
   }
   .calculator__toggle_icon {
     transition: all 0.25s ease-out;

@@ -43,8 +43,28 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    'vue-plausible'
+    'vue-plausible',
+    '@nuxtjs/i18n',
   ],
+
+  i18n: {
+    baseUrl: () => process.env.BASE_URL || 'https://3-in-2.com',
+    locales: [
+      { code: 'en', iso: 'en' },
+      { code: 'de', iso: 'de' },
+    ],
+    strategy: 'prefix',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    vueI18nLoader: true,
+    vueI18n: {
+      fallbackLocale: 'en'
+    }
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
