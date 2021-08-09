@@ -80,7 +80,7 @@ de:
 <style lang="scss">
   body {
     margin: 0;
-    background-color: #111;
+    background-color: #000;
     color: #EEE;
     font-family: monospace;
     font-weight: 100;
