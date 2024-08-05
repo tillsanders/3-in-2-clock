@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <input v-model="date" type="date">
+    <input v-model="date" type="date" />
     <div class="settings__actions">
       <button v-if="date" :title="t('unset')" @click="unset">
         <ClientOnly>
@@ -12,24 +12,24 @@
 </template>
 
 <script lang="ts" setup>
-const { t } = useI18n({ useScope: 'local' })
-const date = ref('')
+const { t } = useI18n({ useScope: "local" });
+const date = ref("");
 watch(date, (date) => {
-  window.localStorage.setItem('date', date)
-})
+  window.localStorage.setItem("date", date);
+});
 
 onMounted(() => {
-  let input = window.localStorage.getItem('date')
-  if (typeof input === 'undefined' || input === null) {
-    input = ''
-    return
+  let input = window.localStorage.getItem("date");
+  if (typeof input === "undefined" || input === null) {
+    input = "";
+    return;
   }
-  date.value = input
-})
+  date.value = input;
+});
 
 function unset() {
-  date.value = ''
-  window.localStorage.removeItem('date')
+  date.value = "";
+  window.localStorage.removeItem("date");
 }
 </script>
 
@@ -51,7 +51,7 @@ de:
     appearance: none;
     border: 0;
     background: transparent;
-    color: #F00;
+    color: #f00;
     padding: 1rem;
     font-size: 4vmin;
   }
