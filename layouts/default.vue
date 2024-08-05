@@ -1,55 +1,53 @@
 <template>
   <main>
     <div class="wrapper">
-      <template v-if="$route.name.startsWith('index')">
-        <nuxt-link :to="localePath('/settings')" :title="$t('navigation.settings')">
-          <FontAwesomeIcon id="settings-link" icon="cog" fixed-width />
-        </nuxt-link>
-        <nuxt-link :to="localePath('/calculator')" :title="$t('navigation.calculator')">
-          <FontAwesomeIcon id="calculator-link" icon="calculator" fixed-width />
-        </nuxt-link>
+      <template v-if="currentRoute && currentRoute.startsWith('index')">
+        <NuxtLink :to="localePath('/settings')" :title="t('navigation.settings')">
+          <ClientOnly>
+            <FontAwesomeIcon id="settings-link" icon="cog" fixed-width />
+          </ClientOnly>
+        </NuxtLink>
+        <NuxtLink :to="localePath('/calculator')" :title="t('navigation.calculator')">
+          <ClientOnly>
+            <FontAwesomeIcon id="calculator-link" icon="calculator" fixed-width />
+          </ClientOnly>
+        </NuxtLink>
       </template>
       <template v-else>
-        <nuxt-link :to="localePath('/')">
-          <FontAwesomeIcon id="settings-link" icon="times" fixed-width :title="$t('navigation.close')" />
-        </nuxt-link>
+        <NuxtLink :to="localePath('/')">
+          <ClientOnly>
+            <FontAwesomeIcon id="settings-link" icon="times" fixed-width :title="t('navigation.close')" />
+          </ClientOnly>
+        </NuxtLink>
       </template>
       <slot />
 
       <div id="smallprint">
-        <nuxt-link v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')">EN</nuxt-link>
-        <nuxt-link v-if="$i18n.locale !== 'de'" :to="switchLocalePath('de')">DE</nuxt-link>
-        <a href="https://plausible.io/3-in-2.com">{{ $t('links.stats') }}</a>
-        <a href="https://till-sanders.de/privacy">{{ $t('links.privacy') }}</a>
-        <a href="https://till-sanders.de/about">{{ $t('links.about') }}</a>
-        <a href="https://twitter.com/tillsanders" :title="$t('links.twitter')">
-          <FontAwesomeIcon :icon="['fab', 'twitter']" fixed-width />
+        <NuxtLink v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')">EN</NuxtLink>
+        <NuxtLink v-if="$i18n.locale !== 'de'" :to="switchLocalePath('de')">DE</NuxtLink>
+        <a href="https://plausible.io/3-in-2.com">{{ t('links.stats') }}</a>
+        <a href="https://till-sanders.de/privacy">{{ t('links.privacy') }}</a>
+        <a href="https://till-sanders.de/about">{{ t('links.about') }}</a>
+        <a href="https://twitter.com/tillsanders" :title="t('links.twitter')">
+          <ClientOnly>
+            <FontAwesomeIcon :icon="['fab', 'twitter']" fixed-width />
+          </ClientOnly>
         </a>
-        <a href="https://github.com/tillsanders/3-in-2-clock" :title="$t('links.github')">
-          <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
+        <a href="https://github.com/tillsanders/3-in-2-clock" :title="t('links.github')">
+          <ClientOnly>
+            <FontAwesomeIcon id="github-link" icon="code-branch" fixed-width />
+          </ClientOnly>
         </a>
       </div>
     </div>
   </main>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      current: ''
-    }
-  },
-  head () {
-    return this.$nuxtI18nHead({ addSeoAttributes: true })
-  },
-  mounted () {
-    this.$router.afterEach((to) => {
-      this.current = to.name
-    })
-    this.current = this.$router.currentRoute.name
-  }
-}
+<script lang="ts" setup>
+const { t } = useI18n({ useScope: 'local' })
+const currentRoute = computed(() => useRouter().currentRoute.value.name as string | undefined)
+const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
 </script>
 
 <i18n lang="yaml">

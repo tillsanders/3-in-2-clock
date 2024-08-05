@@ -2,38 +2,34 @@
   <div class="settings">
     <input v-model="date" type="date">
     <div class="settings__actions">
-      <button v-if="date" @click="unset" :title="$t('unset')"><FontAwesomeIcon icon="trash" /></button>
+      <button v-if="date" :title="t('unset')" @click="unset">
+        <ClientOnly>
+          <FontAwesomeIcon icon="trash" />
+        </ClientOnly>
+      </button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Settings',
-  data () {
-    return {
-      date: ''
-    }
-  },
-  watch: {
-    date (date) {
-      window.localStorage.setItem('date', date)
-    }
-  },
-  mounted () {
-    const date = window.localStorage.getItem('date')
-    if (typeof date === 'undefined' || date === null) {
-      this.date = ''
-      return
-    }
-    this.date = date
-  },
-  methods: {
-    unset() {
-      this.date = ''
-      window.localStorage.removeItem('date')
-    }
+<script lang="ts" setup>
+const { t } = useI18n({ useScope: 'local' })
+const date = ref('')
+watch(date, (date) => {
+  window.localStorage.setItem('date', date)
+})
+
+onMounted(() => {
+  let input = window.localStorage.getItem('date')
+  if (typeof input === 'undefined' || input === null) {
+    input = ''
+    return
   }
+  date.value = input
+})
+
+function unset() {
+  date.value = ''
+  window.localStorage.removeItem('date')
 }
 </script>
 

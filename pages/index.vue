@@ -1,9 +1,9 @@
 <template>
   <div class="clock">
-    <template v-if="start !== null && currentTime > start && currentTime <= end">
+    <template v-if="start && currentTime && end && gameTime && realTime && currentTime > start && currentTime <= end">
       <div class="clock__gametime">
         <div class="clock__day">
-          {{ $t('day') }}&nbsp;{{ days(gameTime) + 1 }},&nbsp;
+          {{ t('day') }}&nbsp;{{ days(gameTime) + 1 }},&nbsp;
         </div>
         <div class="clock__hours_minutes">
           {{ format(hours(gameTime)) }}:{{ format(minutes(gameTime)) }}
@@ -12,14 +12,16 @@
           :{{ format(seconds(gameTime)) }}
         </div>
       </div>
-      <button class="clock__realtime_toggle" :title="$t('toggle-realtime-clock')">
-        <FontAwesomeIcon v-if="realTimeVisible" icon="eye" fixed-width @click="realTimeVisible = false" />
-        <FontAwesomeIcon v-if="!realTimeVisible" icon="eye-slash" fixed-width @click="realTimeVisible = true" />
+      <button class="clock__realtime_toggle" :title="t('toggle-realtime-clock')">
+        <ClientOnly>
+          <FontAwesomeIcon v-if="realTimeVisible" icon="eye" fixed-width @click="realTimeVisible = false" />
+          <FontAwesomeIcon v-if="!realTimeVisible" icon="eye-slash" fixed-width @click="realTimeVisible = true" />
+        </ClientOnly>
       </button>
       <div class="clock__realtime_wrapper">
         <div v-if="realTimeVisible" class="clock__realtime">
           <div class="clock__day">
-            {{ $t('day') }}}&nbsp;{{ days(realTime) + 1 }},&nbsp;
+            {{ t('day') }}}&nbsp;{{ days(realTime) + 1 }},&nbsp;
           </div>
           <div class="clock__hours_minutes">
             {{ format(hours(realTime)) }}:{{ format(minutes(realTime)) }}
@@ -30,75 +32,100 @@
         </div>
       </div>
     </template>
-    <template v-else-if="start !== null && currentTime < start">
+    <template v-else-if="start && currentTime && currentTime < start">
       <div class="clock__empty">
-        {{ $t('ready') }}
+        {{ t('ready') }}
       </div>
     </template>
-    <template v-else-if="start !== null && currentTime > end">
+    <template v-else-if="start && currentTime && end && currentTime > end">
       <div class="clock__empty">
-        {{ $t('end') }}
+        {{ t('end') }}
       </div>
     </template>
     <template v-else>
       <div class="clock__empty">
-        {{ $t('3-in-2') }}
+        {{ t('3-in-2') }}
         <p>
-          {{ $t('introduction-1') }}<br>
+          {{ t('introduction-1') }}<br>
           <br>
-          {{ $t('introduction-2') }}
+          {{ t('introduction-2') }}
         </p>
       </div>
     </template>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Home',
-  data () {
-    return {
-      start: null, // start date as unix timestamp
-      end: null, // end date as unix timestamp
-      currentTime: null, // current unix timestamp
-      realTimeVisible: false,
-      realTime: null, // real time passed, in seconds
-      gameTime: null, // pretended time passed, in seconds
-      timezoneOffset: (new Date).getTimezoneOffset() * 60 * 1000 // milliseconds
-    }
-  },
-  mounted () {
-    const date = window.localStorage.getItem('date')
-    if (typeof date !== 'undefined' && date !== null) {
-      this.start = new Date(date).getTime()
-      this.end = this.start + 2 * 24 * 60 * 60 * 1000
-    }
-    setInterval(() => {
-      this.currentTime = new Date().getTime() - this.timezoneOffset
-      this.realTime = this.currentTime - this.start
-      this.gameTime = this.realTime / 2 * 3
-    }, 1)
-  },
-  methods: {
-    days (timestamp) {
-      return Math.floor(timestamp / 24 / 60 / 60 / 1000)
-    },
-    hours (timestamp) {
-      return Math.floor((timestamp - this.days(timestamp) * 24 * 60 * 60 * 1000) / 60 / 60 / 1000)
-    },
-    minutes (timestamp) {
-      return Math.floor((timestamp - this.days(timestamp) * 24 * 60 * 60 * 1000 - this.hours(timestamp) * 60 * 60 * 1000) / 60 / 1000)
-    },
-    seconds (timestamp) {
-      return Math.floor((timestamp - this.days(timestamp) * 24 * 60 * 60 * 1000 - this.hours(timestamp) * 60 * 60 * 1000 - this.minutes(timestamp) * 60 * 1000) / 1000)
-    },
-    format (time) {
-      if (time < 10) {
-        return `0${time}`
-      }
-      return time
-    }
+<script lang="ts" setup>
+const { t } = useI18n({ useScope: 'local' })
+/**
+ * Start date as unix timestamp
+ */
+const start = ref<number | undefined>(undefined)
+
+/**
+ * End date as unix timestamp
+ */
+const end = ref<number | undefined>(undefined)
+
+/**
+ * Current unix timestamp
+ */
+const currentTime = ref<number | undefined>(undefined)
+
+/**
+ * Real time passed, in seconds
+ */
+const realTimeVisible = ref<boolean>(false)
+
+/**
+ * Real time passed, in seconds
+ */
+const realTime = ref<number | undefined>(undefined)
+
+/**
+ * Pretended time passed, in seconds
+ */
+const gameTime = ref<number | undefined>(undefined)
+
+/**
+ * Timezone offset in milliseconds
+ */
+const timezoneOffset = (new Date).getTimezoneOffset() * 60 * 1000
+
+onMounted(() => {
+  const date = window.localStorage.getItem('date')
+  if (typeof date !== 'undefined' && date !== null) {
+    start.value = new Date(date).getTime()
+    end.value = start.value + 2 * 24 * 60 * 60 * 1000
   }
+  setInterval(() => {
+    currentTime.value = new Date().getTime() - timezoneOffset
+    realTime.value = currentTime.value - (start.value ?? 0)
+    gameTime.value = realTime.value / 2 * 3
+  }, 1)
+})
+
+function days (timestamp: number): number {
+  return Math.floor(timestamp / 24 / 60 / 60 / 1000)
+}
+
+function hours (timestamp: number): number {
+  return Math.floor((timestamp - days(timestamp) * 24 * 60 * 60 * 1000) / 60 / 60 / 1000)
+}
+
+function minutes (timestamp: number): number {
+  return Math.floor((timestamp - days(timestamp) * 24 * 60 * 60 * 1000 - hours(timestamp) * 60 * 60 * 1000) / 60 / 1000)
+}
+
+function seconds (timestamp: number): number {
+  return Math.floor((timestamp - days(timestamp) * 24 * 60 * 60 * 1000 - hours(timestamp) * 60 * 60 * 1000 - minutes(timestamp) * 60 * 1000) / 1000)
+}
+
+function format (time: number): string {
+  if (time < 10) {
+    return `0${time}`
+  }
+  return time.toString()
 }
 </script>
 
