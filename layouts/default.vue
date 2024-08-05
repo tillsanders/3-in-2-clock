@@ -14,7 +14,7 @@
           <FontAwesomeIcon id="settings-link" icon="times" fixed-width :title="$t('navigation.close')" />
         </nuxt-link>
       </template>
-      <nuxt />
+      <slot />
 
       <div id="smallprint">
         <nuxt-link v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')">EN</nuxt-link>

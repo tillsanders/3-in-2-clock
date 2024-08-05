@@ -5,13 +5,14 @@
   "author": "Till Sanders <mail@till-sanders.de>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt dev",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint:js": "eslint  .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint": "npm run lint:js && npm run lint:style",
+    "prettier": "prettier . --write",
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
@@ -22,9 +23,10 @@
     "@nuxtjs/i18n": "^8.3.3"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^0.5.0",
     "@vue/test-utils": "^2.4.6",
     "nuxt": "^3.12.4",
-    "prettier": "^3.3.3",
+    "prettier": "3.3.3",
     "sass": "^1.77.8"
   }
 }
