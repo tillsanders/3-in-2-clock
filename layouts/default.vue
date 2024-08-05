@@ -1,5 +1,6 @@
 <template>
   <main>
+    <VitePwaManifest />
     <div class="wrapper">
       <template v-if="currentRoute && currentRoute.startsWith('index')">
         <NuxtLink

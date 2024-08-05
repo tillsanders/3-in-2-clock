@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
-  modules: ["@nuxtjs/i18n", "@nuxt/eslint", "v-plausible"],
+  modules: ["@nuxtjs/i18n", "@nuxt/eslint", "v-plausible", "@vite-pwa/nuxt"],
   components: [
     {
       path: "~/components",
@@ -41,6 +41,15 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: "i18n_redirected",
       redirectOn: "root",
+    },
+  },
+  pwa: {
+    manifest: {
+      name: "3 in 2",
+      short_name: "3 in 2",
+      description:
+        "Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.",
+      theme_color: "#ffffff",
     },
   },
   plausible: {

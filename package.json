@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.0",
+    "@vite-pwa/nuxt": "^0.9.1",
     "@vue/test-utils": "^2.4.6",
     "nuxt": "^3.12.4",
     "postcss-html": "^1.7.0",
