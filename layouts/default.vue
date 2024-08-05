@@ -47,7 +47,10 @@
         <a href="https://plausible.io/3-in-2.com">{{ t("links.stats") }}</a>
         <a href="https://till-sanders.de/privacy">{{ t("links.privacy") }}</a>
         <a href="https://till-sanders.de/about">{{ t("links.about") }}</a>
-        <a href="https://fosstodon.org/@tillsanders" :title="t('links.fosstodon')">
+        <a
+          href="https://fosstodon.org/@tillsanders"
+          :title="t('links.fosstodon')"
+        >
           <ClientOnly>
             <FontAwesomeIcon :icon="['fab', 'mastodon']" fixed-width />
           </ClientOnly>

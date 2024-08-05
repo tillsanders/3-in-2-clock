@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
-  modules: ["@nuxtjs/i18n", "@nuxt/eslint"],
+  modules: ["@nuxtjs/i18n", "@nuxt/eslint", "v-plausible"],
   components: [
     {
       path: "~/components",
@@ -41,6 +41,12 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: "i18n_redirected",
       redirectOn: "root",
+    },
+  },
+  plausible: {
+    init: {
+      domain: "3-in-2.com",
+      trackLocalhost: true,
     },
   },
 });
