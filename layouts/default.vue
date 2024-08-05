@@ -149,9 +149,11 @@ main {
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+
   .container {
     flex: auto;
   }
+
   .wrapper {
     padding: 1rem;
   }
@@ -186,6 +188,7 @@ a {
   right: 0;
   color: #555;
   padding: 0.5rem;
+
   a {
     display: inline-block;
     padding: 0.5rem;

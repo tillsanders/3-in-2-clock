@@ -129,7 +129,7 @@ de:
 
 <style lang="scss">
 .calculator__toggle {
-  padding: 2rem 2rem 3rem 2rem;
+  padding: 2rem 2rem 3rem;
   font-size: 3vmin;
   cursor: pointer;
   appearance: none;
@@ -137,10 +137,12 @@ de:
   background: transparent;
   display: block;
   margin: 0 auto;
-  color: currentColor;
+  color: currentcolor;
 }
+
 .calculator__toggle_icon {
   transition: all 0.25s ease-out;
+
   &.calculator__toggle_icon--flipped {
     transform: rotate(180deg);
   }

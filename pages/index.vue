@@ -190,6 +190,7 @@ de:
   display: inline-block;
   margin: 0 auto;
 }
+
 .clock__empty p {
   font-size: 1rem;
   text-transform: none;
@@ -198,6 +199,7 @@ de:
   line-height: 1.5;
   margin-top: 4rem;
 }
+
 .clock__realtime_toggle {
   position: fixed;
   top: 0;
@@ -209,35 +211,42 @@ de:
   background: transparent;
   border: 0;
 }
+
 .clock__realtime_wrapper {
   position: absolute;
   right: 0;
   bottom: 6rem;
   left: 0;
 }
+
 .clock__realtime {
   display: inline-block;
   position: relative;
   font-size: 4vmin;
   color: #555;
 }
+
 .clock__day,
 .clock__hours_minutes,
 .clock__seconds {
   display: inline-block;
 }
+
 .clock__hours_minutes {
   color: #fff;
 }
+
 .clock__day,
 .clock__seconds {
   color: #555;
 }
+
 .clock__day {
   position: absolute;
   top: 0;
   right: 100%;
 }
+
 .clock__seconds {
   position: absolute;
   top: 0;

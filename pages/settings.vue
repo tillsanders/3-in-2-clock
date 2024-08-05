@@ -47,6 +47,7 @@ de:
   right: 0;
   bottom: 30vh;
   text-align: center;
+
   button {
     appearance: none;
     border: 0;
