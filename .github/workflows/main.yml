@@ -15,20 +15,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [24]
 
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v4.0.2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -41,12 +41,15 @@ jobs:
       - name: Run linter 👀
         run: npm run lint
 
+      - name: Run prettier
+        run: npx prettier --check .
+
       - name: Run tests 🧪
         run: npm run test
 
       - name: Build 🚚
         if: success()
-        run: npm run build && npm run generate
+        run: npm run generate
 
       - name: Deploy to GitHub Pages
         if: success()
