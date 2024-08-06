@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="calculator">
     <template v-if="mode === 'real-to-game'">
       <label>{{ t("real-time") }}</label>
       <select v-model="dayIn">
@@ -128,6 +128,14 @@ de:
 </i18n>
 
 <style lang="scss">
+.calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-height: 90vh;
+  min-height: 90dvh;
+}
 .calculator__toggle {
   padding: 2rem 2rem 3rem;
   font-size: 3vmin;

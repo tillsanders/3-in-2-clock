@@ -190,6 +190,13 @@ de:
 </i18n>
 
 <style lang="scss">
+.clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-height: 90dvh;
+}
 .clock__gametime,
 .clock__empty {
   font-size: 7vmin;

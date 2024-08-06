@@ -126,6 +126,12 @@ de:
 
 <style lang="scss">
 .intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  text-align: center;
+  min-height: 90vh;
+  min-height: 90dvh;
   background-color: #000;
   color: #fff;
   scroll-snap-type: mandatory;
@@ -175,7 +181,7 @@ de:
   span {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10vh;
+    margin-bottom: calc(25vh + env(safe-area-inset-bottom, 0));
   }
 
   small {

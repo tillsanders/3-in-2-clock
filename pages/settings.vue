@@ -43,6 +43,14 @@ de:
 </i18n>
 
 <style lang="scss">
+.settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  min-height: 90vh;
+  min-height: 90dvh;
+}
 .settings__actions {
   position: fixed;
   left: 0;

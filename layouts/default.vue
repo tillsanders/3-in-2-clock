@@ -175,10 +175,6 @@ main {
 
 main {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
 
   .container {
     flex: auto;
