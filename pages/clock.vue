@@ -42,7 +42,7 @@
       <div class="clock__realtime_wrapper">
         <div v-if="realTimeVisible" class="clock__realtime">
           <div class="clock__day">
-            {{ t("day") }}}&nbsp;{{ days(realTime) + 1 }},&nbsp;
+            {{ t("day") }}&nbsp;{{ days(realTime) + 1 }},&nbsp;
           </div>
           <div class="clock__hours_minutes">
             {{ format(hours(realTime)) }}:{{ format(minutes(realTime)) }}
@@ -195,6 +195,7 @@ de:
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  min-height: 90vh;
   min-height: 90dvh;
 }
 .clock__gametime,
