@@ -62,10 +62,7 @@
 const { t } = useI18n({ useScope: "local" });
 const localePath = useLocalePath();
 
-const date = useCookie("start_date", {
-  sameSite: "strict",
-  maxAge: 60 * 60 * 24 * 7,
-});
+const { startDate: date } = useStartDate();
 
 if (typeof date.value === "string" && date.value !== "") {
   useRouter().push({ path: localePath("/clock") });

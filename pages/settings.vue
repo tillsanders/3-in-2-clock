@@ -19,10 +19,7 @@
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
 const localePath = useLocalePath();
-const date = useCookie("start_date", {
-  sameSite: "strict",
-  maxAge: 60 * 60 * 24 * 7,
-});
+const { startDate: date } = useStartDate();
 
 function onSubmit() {
   if (date.value) {
