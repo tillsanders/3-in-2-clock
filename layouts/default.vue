@@ -122,7 +122,7 @@ body {
 
 input,
 select {
-  font-family: sans-serif;
+  font-family: monospace;
   display: block;
   width: calc(100% - 1.5rem);
   outline: none;
@@ -139,7 +139,7 @@ select {
 }
 
 form button {
-  font-family: sans-serif;
+  font-family: monospace;
   display: block;
   width: 100%;
   padding: 0.75rem;
