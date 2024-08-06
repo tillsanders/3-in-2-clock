@@ -132,7 +132,7 @@ select {
   background: #333;
   color: #fff;
   font-weight: 100;
-  font-size: 4vmin;
+  font-size: max(1rem, 4vmin);
   appearance: none;
   min-height: 1.4em;
   border-radius: 4px;
@@ -148,7 +148,7 @@ form button {
   background: #fff;
   color: #000;
   font-weight: 100;
-  font-size: 4vmin;
+  font-size: max(1rem, 3vmin);
   appearance: none;
   min-height: 1.4em;
   border-radius: 4px;

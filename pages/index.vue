@@ -126,12 +126,7 @@ de:
 
 <style lang="scss">
 .intro {
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
   text-align: center;
-  min-height: 90vh;
-  min-height: 90dvh;
   background-color: #000;
   color: #fff;
   scroll-snap-type: mandatory;
@@ -201,7 +196,7 @@ de:
   }
 
   form {
-    max-width: 25rem;
+    max-width: 35rem;
     padding: 5rem;
     margin: 0 auto;
   }
