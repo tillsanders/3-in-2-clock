@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -22,10 +22,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v4.0.3
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
+          node-version: 20
 
       - name: Cache node_modules 📦
         uses: actions/cache@v4.0.2
@@ -49,13 +48,24 @@ jobs:
 
       - name: Build 🚚
         if: success()
-        run: npm run generate
+        run: npx nuxt build --preset github_pages
 
-      - name: Deploy to GitHub Pages
+      - name: Upload artifact
         if: success()
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: actions/upload-pages-artifact@v1
         with:
-          build_dir: .output/public
-          fqdn: 3-in-2.com
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: ./.output/public
+
+  deploy:
+      needs: build
+      permissions:
+        pages: write
+        id-token: write
+      environment:
+        name: github_pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v1
