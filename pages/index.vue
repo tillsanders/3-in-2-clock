@@ -41,7 +41,12 @@
       <form @submit.prevent="onSubmit">
         <label>{{ t("label") }}</label>
         <input v-model="date" type="date" />
-        <button type="submit">{{ t("submit") }}</button>
+        <button
+          type="submit"
+          :disabled="typeof date !== 'string' || date === ''"
+        >
+          {{ t("submit") }}
+        </button>
         <div class="intro__quick-actions">
           <button type="button" @click="useToday">{{ t("today") }}</button>
           <button type="button" @click="useYesterday">
@@ -132,6 +137,7 @@ de:
   position: absolute;
   inset: 0;
   scroll-behavior: smooth;
+
   &__page {
     height: 100vh;
     scroll-snap-align: center;
@@ -139,6 +145,7 @@ de:
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     strong {
       padding: 2rem 10vw;
       font-size: 1.5rem;
@@ -153,6 +160,7 @@ de:
     display: flex;
     gap: 0.5rem;
     margin-top: 1rem;
+
     button {
       background: #000;
       border: 2px solid #aaa;
@@ -166,11 +174,13 @@ de:
 
 #first {
   justify-content: flex-end;
+
   span {
     display: flex;
     flex-direction: column;
     margin-bottom: 10vh;
   }
+
   small {
     color: #666;
   }
@@ -182,9 +192,11 @@ de:
     font-size: 1rem;
     margin-bottom: 2vh;
   }
+
   strong {
     font-size: 15vmin;
   }
+
   form {
     max-width: 25rem;
     padding: 5rem;
@@ -202,12 +214,13 @@ de:
   100% {
     opacity: 0.99;
     text-shadow:
-      0 -0.05em 0.15em rgba(255, 255, 255, 0.75),
-      0 0 0.1em rgba(255, 255, 255, 0.1),
-      0 0 0.5em rgba(255, 255, 255, 0.1),
+      0 -0.05em 0.15em rgb(255 255 255 / 75%),
+      0 0 0.1em rgb(255 255 255 / 10%),
+      0 0 0.5em rgb(255 255 255 / 10%),
       0 0 0.1em #619fbe,
       0 0 2px #000;
   }
+
   20%,
   21%,
   63%,
