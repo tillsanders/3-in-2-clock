@@ -55,7 +55,7 @@ jobs:
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
-          build_dir: dist
+          build_dir: .output/public
           fqdn: 3-in-2.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
