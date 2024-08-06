@@ -1,6 +1,11 @@
 <template>
   <div class="settings">
-    <input v-model="date" type="date" />
+    <form @submit.prevent="onSubmit">
+      <input v-model="date" type="date" />
+      <button type="submit" :disabled="typeof date !== 'string' || date === ''">
+        {{ t("submit") }}
+      </button>
+    </form>
     <div class="settings__actions">
       <button v-if="date" :title="t('unset')" @click="unset">
         <ClientOnly>
@@ -19,6 +24,12 @@ const date = useCookie("start_date", {
   maxAge: 60 * 60 * 24 * 7,
 });
 
+function onSubmit() {
+  if (date.value) {
+    useRouter().push({ path: localePath("/clock") });
+  }
+}
+
 function unset() {
   date.value = "";
   useRouter().push({ path: localePath("/") });
@@ -27,8 +38,10 @@ function unset() {
 
 <i18n lang="yaml">
 en:
+  submit: "Okay"
   unset: "Unset start-date."
 de:
+  submit: "Okay"
   unset: "Start-Datum leeren."
 </i18n>
 
