@@ -1,6 +1,6 @@
 {
   "name": "3-in-2-clock",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "'3 in 2' is a fun game for summer camps where the whole camp experiences three whole (and otherwise normal) days in the time of two real days. You simply pretend that time passes more quickly. All you need is a clock running faster.",
   "author": "Till Sanders <mail@till-sanders.de>",
   "private": true,
