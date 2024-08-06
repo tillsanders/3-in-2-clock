@@ -13,23 +13,15 @@
 
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
-const date = ref("");
-watch(date, (date) => {
-  window.localStorage.setItem("date", date);
-});
-
-onMounted(() => {
-  let input = window.localStorage.getItem("date");
-  if (typeof input === "undefined" || input === null) {
-    input = "";
-    return;
-  }
-  date.value = input;
+const localePath = useLocalePath()
+const date = useCookie("start_date", {
+  sameSite: 'strict',
+  maxAge: 60 * 60 * 24 * 7,
 });
 
 function unset() {
   date.value = "";
-  window.localStorage.removeItem("date");
+  useRouter().push({ path: localePath('/') });
 }
 </script>
 

@@ -2,7 +2,7 @@
   <main>
     <VitePwaManifest />
     <div class="wrapper">
-      <template v-if="currentRoute && currentRoute.startsWith('index')">
+      <template v-if="currentRoute && currentRoute.startsWith('clock')">
         <NuxtLink
           :to="localePath('/settings')"
           :title="t('navigation.settings')"
@@ -25,7 +25,7 @@
         </NuxtLink>
       </template>
       <template v-else>
-        <NuxtLink :to="localePath('/')">
+        <NuxtLink :to="localePath('/clock')">
           <ClientOnly>
             <FontAwesomeIcon
               id="settings-link"
@@ -99,7 +99,7 @@ de:
     stats: "Stats"
     privacy: "Datenschutz"
     about: "Impressum"
-    twitter: "Besuche den Entwickler auf Twitter"
+    fosstodon: "Besuche den Entwickler auf Mastodon"
     github: "Besuche das Projekt auf GitHub"
 </i18n>
 
@@ -118,9 +118,9 @@ input,
 select {
   font-family: sans-serif;
   display: block;
-  width: calc(100% - 2rem);
+  width: calc(100% - 1.5rem);
   outline: none;
-  padding: 1rem;
+  padding: 0.75rem;
   margin: 1rem 0;
   border: none;
   background: #333;
@@ -130,6 +130,25 @@ select {
   border-radius: 0;
   appearance: none;
   min-height: 1.4em;
+  border-radius: 4px;
+}
+
+form button {
+  font-family: sans-serif;
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border: none;
+  background: #FFF;
+  color: #000;
+  font-weight: 100;
+  font-size: 4vmin;
+  border-radius: 0;
+  appearance: none;
+  min-height: 1.4em;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 select {

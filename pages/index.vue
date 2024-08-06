@@ -1,255 +1,208 @@
 <template>
-  <div class="clock">
-    <template
-      v-if="
-        start &&
-        currentTime &&
-        end &&
-        gameTime &&
-        realTime &&
-        currentTime > start &&
-        currentTime <= end
-      "
-    >
-      <div class="clock__gametime">
-        <div class="clock__day">
-          {{ t("day") }}&nbsp;{{ days(gameTime) + 1 }},&nbsp;
+  <div class="intro">
+    <div id="first" class="intro__page">
+      <span>
+        <strong>{{ t("intro-1") }}</strong>
+        <small>{{ t("scroll") }}</small>
+      </span>
+    </div>
+    <div id="second" class="intro__page">
+      <strong>{{ t("intro-2") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-3") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-4") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-5") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-6") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-7") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-8") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-9") }}</strong>
+    </div>
+    <div class="intro__page">
+      <strong>{{ t("intro-10") }}</strong>
+    </div>
+    <div id="welcome" class="intro__page">
+      <h1>
+        <small>{{ t("welcome") }}</small>
+        <strong>{{ t("3-in-2") }}</strong>
+      </h1>
+      <form @submit.prevent="onSubmit">
+        <label>{{ t("label") }}</label>
+        <input v-model="date" type="date" />
+        <button type="submit">{{ t("submit") }}</button>
+        <div class="intro__quick-actions">
+          <button type="button" @click="useToday">{{ t("today") }}</button>
+          <button type="button" @click="useYesterday">{{ t("yesterday") }}</button>
         </div>
-        <div class="clock__hours_minutes">
-          {{ format(hours(gameTime)) }}:{{ format(minutes(gameTime)) }}
-        </div>
-        <div class="clock__seconds">:{{ format(seconds(gameTime)) }}</div>
-      </div>
-      <button
-        class="clock__realtime_toggle"
-        :title="t('toggle-realtime-clock')"
-      >
-        <ClientOnly>
-          <FontAwesomeIcon
-            v-if="realTimeVisible"
-            icon="eye"
-            fixed-width
-            @click="realTimeVisible = false"
-          />
-          <FontAwesomeIcon
-            v-if="!realTimeVisible"
-            icon="eye-slash"
-            fixed-width
-            @click="realTimeVisible = true"
-          />
-        </ClientOnly>
-      </button>
-      <div class="clock__realtime_wrapper">
-        <div v-if="realTimeVisible" class="clock__realtime">
-          <div class="clock__day">
-            {{ t("day") }}}&nbsp;{{ days(realTime) + 1 }},&nbsp;
-          </div>
-          <div class="clock__hours_minutes">
-            {{ format(hours(realTime)) }}:{{ format(minutes(realTime)) }}
-          </div>
-          <div class="clock__seconds">:{{ format(seconds(realTime)) }}</div>
-        </div>
-      </div>
-    </template>
-    <template v-else-if="start && currentTime && currentTime < start">
-      <div class="clock__empty">
-        {{ t("ready") }}
-      </div>
-    </template>
-    <template v-else-if="start && currentTime && end && currentTime > end">
-      <div class="clock__empty">
-        {{ t("end") }}
-      </div>
-    </template>
-    <template v-else>
-      <div class="clock__empty">
-        {{ t("3-in-2") }}
-        <p>
-          {{ t("introduction-1") }}<br />
-          <br />
-          {{ t("introduction-2") }}
-        </p>
-      </div>
-    </template>
+      </form>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
-/**
- * Start date as unix timestamp
- */
-const start = ref<number | undefined>(undefined);
+const localePath = useLocalePath()
 
-/**
- * End date as unix timestamp
- */
-const end = ref<number | undefined>(undefined);
-
-/**
- * Current unix timestamp
- */
-const currentTime = ref<number | undefined>(undefined);
-
-/**
- * Real time passed, in seconds
- */
-const realTimeVisible = ref<boolean>(false);
-
-/**
- * Real time passed, in seconds
- */
-const realTime = ref<number | undefined>(undefined);
-
-/**
- * Pretended time passed, in seconds
- */
-const gameTime = ref<number | undefined>(undefined);
-
-/**
- * Timezone offset in milliseconds
- */
-const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
-
-onMounted(() => {
-  const date = window.localStorage.getItem("date");
-  if (typeof date !== "undefined" && date !== null) {
-    start.value = new Date(date).getTime();
-    end.value = start.value + 2 * 24 * 60 * 60 * 1000;
-  }
-  setInterval(() => {
-    currentTime.value = new Date().getTime() - timezoneOffset;
-    realTime.value = currentTime.value - (start.value ?? 0);
-    gameTime.value = (realTime.value / 2) * 3;
-  }, 1);
+const date = useCookie("start_date", {
+  sameSite: 'strict',
+  maxAge: 60 * 60 * 24 * 7,
 });
 
-function days(timestamp: number): number {
-  return Math.floor(timestamp / 24 / 60 / 60 / 1000);
+if (typeof date.value === 'string' && date.value !== '') {
+  useRouter().push({ path: localePath('/clock') });
 }
 
-function hours(timestamp: number): number {
-  return Math.floor(
-    (timestamp - days(timestamp) * 24 * 60 * 60 * 1000) / 60 / 60 / 1000,
-  );
+function useToday() {
+  date.value = new Date().toISOString().split('T')[0];
 }
 
-function minutes(timestamp: number): number {
-  return Math.floor(
-    (timestamp -
-      days(timestamp) * 24 * 60 * 60 * 1000 -
-      hours(timestamp) * 60 * 60 * 1000) /
-      60 /
-      1000,
-  );
+function useYesterday() {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  date.value = yesterday.toISOString().split('T')[0];
 }
 
-function seconds(timestamp: number): number {
-  return Math.floor(
-    (timestamp -
-      days(timestamp) * 24 * 60 * 60 * 1000 -
-      hours(timestamp) * 60 * 60 * 1000 -
-      minutes(timestamp) * 60 * 1000) /
-      1000,
-  );
-}
-
-function format(time: number): string {
-  if (time < 10) {
-    return `0${time}`;
+function onSubmit() {
+  if (date.value) {
+    useRouter().push({ path: localePath('/clock') });
   }
-  return time.toString();
 }
 </script>
 
 <i18n lang="yaml">
-en:
-  3-in-2: "3 in 2"
-  introduction-1: "Set your start date in the settings and then use the clock to pretend there are 72 hours in 48 or 3 days in 2."
-  introduction-2: "Sneak an extra day into your life. Use it wisely."
-  toggle-realtime-clock: "Show real time"
-  day: "Day"
-  ready: "READY"
-  end: "END"
-de:
-  3-in-2: "3 in 2"
-  introduction-1: "Setzt euer Start-Datum in den Einstellungen und beobachtet, wie die Uhr schneller läuft damit ihr 72 Stunden in 48 echten Stunden erleben könnt, oder 3 Tage in 2."
-  introduction-2: "Verschafft euch einen Extra-Tag. Nutzt ihn weise."
-  toggle-realtime-clock: "Zeige echte Zeit"
-  day: "Tag"
-  ready: "BEREIT"
-  end: "ENDE"
+  en:
+    intro-1: "Hello stranger."
+    scroll: "Don't be shy, scroll."
+    intro-2: "How much time do you have? Such a simple question ..."
+    intro-3: "See, we all have a fixed amount of time in this world."
+    intro-4: "No one knows how much they have."
+    intro-5: "And the universe doesn't owe you any more if you waste it."
+    intro-6: "So you can spend your days watching the sun and the moon dance."
+    intro-7: "Or ... every once in a while ..."
+    intro-8: "... you can sneak an extra day into your life."
+    intro-9: "And in two days live three."
+    intro-10: "Use them wisely."
+    welcome: "Welcome to"
+    3-in-2: "3 in 2"
+    label: "Please set your start date, now."
+    submit: "Set start date"
+    today: "Today"
+    yesterday: "Yesterday"
+  de:
+    intro-1: "Hallo."
+    scroll: "Sei nicht schüchtern, scrolle."
+    intro-2: "Wie viel Zeit hast du? So eine einfache Frage ..."
+    intro-3: "Wir alle haben eine endliche Menge Zeit in dieser Welt."
+    intro-4: "Niemand weiß, wie viel uns bleibt."
+    intro-5: "Und das Universum schuldet dir keine Sekunde mehr, wenn du sie verschwendest."
+    intro-6: "Du kannst deine Tage damit verbringen, dem Lauf von Sonne und Mond zu folgen."
+    intro-7: "Oder ... ab und zu ..."
+    intro-8: "... kannst du dir einen zusätzlichen Tag erspielen."
+    intro-9: "Und in zwei Tagen drei erleben."
+    intro-10: "Nutze sie weise."
+    welcome: "Willkommen bei"
+    3-in-2: "3 in 2"
+    label: "Bitte setze dein Start-Datum, jetzt."
+    submit: "Start-Datum setzen"
+    today: "Heute"
+    yesterday: "Gestern"
 </i18n>
 
 <style lang="scss">
-.clock__gametime,
-.clock__empty {
-  font-size: 7vmin;
-  text-align: center;
-  position: relative;
-  display: inline-block;
-  margin: 0 auto;
-}
-
-.clock__empty p {
-  font-size: 1rem;
-  text-transform: none;
-  width: 35rem;
-  max-width: 80vw;
-  line-height: 1.5;
-  margin-top: 4rem;
-}
-
-.clock__realtime_toggle {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 1rem;
-  color: #555;
-  cursor: pointer;
-  appearance: none;
-  background: transparent;
-  border: 0;
-}
-
-.clock__realtime_wrapper {
-  position: absolute;
-  right: 0;
-  bottom: 6rem;
-  left: 0;
-}
-
-.clock__realtime {
-  display: inline-block;
-  position: relative;
-  font-size: 4vmin;
-  color: #555;
-}
-
-.clock__day,
-.clock__hours_minutes,
-.clock__seconds {
-  display: inline-block;
-}
-
-.clock__hours_minutes {
+.intro {
+  background-color: #000;
   color: #fff;
-}
-
-.clock__day,
-.clock__seconds {
-  color: #555;
-}
-
-.clock__day {
+  scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
+  overflow: auto;
   position: absolute;
-  top: 0;
-  right: 100%;
+  inset: 0;
+  scroll-behavior: smooth;
+  &__page {
+    height: 100vh;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    strong {
+      padding: 2rem 10vw;
+      font-size: 1.5rem;
+      animation-name: flicker;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+  }
+
+  &__quick-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    button {
+      background: #000;
+      border: 2px solid #aaa;
+      color: #aaa;
+      font-size: 2vmin;
+      padding: 0.5rem;
+      margin: 0;
+    }
+  }
 }
 
-.clock__seconds {
-  position: absolute;
-  top: 0;
-  left: 100%;
+#first {
+  justify-content: flex-end;
+  span {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10vh;
+  }
+  small {
+    color: #666;
+  }
+}
+
+#welcome {
+  small {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 2vh;
+  }
+  strong {
+    font-size: 15vmin;
+  }
+  form {
+    max-width: 25rem;
+    padding: 5rem;
+    margin: 0 auto;
+  }
+}
+
+@keyframes flicker {
+	0%, 19%, 22%, 62%, 64%, 70%, 100% {
+		opacity: 0.99;
+		text-shadow:
+			0 -0.05em 0.15em rgba(255, 255, 255, 0.75),
+			0 0 0.1em rgba(255, 255, 255, 0.1),
+			0 0 0.5em rgba(255, 255, 255, 0.1),
+			0 0 0.1em #619fbe,
+			0 0 2px #000;
+	}
+	20%, 21%, 63%, 65%, 69.9% {
+		opacity: 0.4;
+		text-shadow: none;
+	}
 }
 </style>

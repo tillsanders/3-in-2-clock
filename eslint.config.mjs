@@ -4,6 +4,7 @@ export default withNuxt([
   {
     rules: {
       "vue/html-self-closing": "off",
+      "no-irregular-whitespace": "off",
     },
   },
 ]);
