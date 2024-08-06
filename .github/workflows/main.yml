@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
 
+      - name: Prepare Nuxt
+        run: npx nuxt prepare
+
       - name: Run linter 👀
         run: npm run lint
 
