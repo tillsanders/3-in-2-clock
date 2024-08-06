@@ -198,6 +198,7 @@ de:
   min-height: 90vh;
   min-height: 90dvh;
 }
+
 .clock__gametime,
 .clock__empty {
   font-size: 7vmin;

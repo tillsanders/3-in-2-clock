@@ -54,6 +54,7 @@ de:
   min-height: 90vh;
   min-height: 90dvh;
 }
+
 .settings__actions {
   position: fixed;
   left: 0;

@@ -136,6 +136,7 @@ de:
   min-height: 90vh;
   min-height: 90dvh;
 }
+
 .calculator__toggle {
   padding: 2rem 2rem 3rem;
   font-size: 3vmin;
