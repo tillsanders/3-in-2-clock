@@ -78,7 +78,7 @@
 const { t } = useI18n({ useScope: "local" });
 
 const date = useCookie("start_date", {
-  sameSite: 'strict',
+  sameSite: "strict",
   maxAge: 60 * 60 * 24 * 7,
 });
 
@@ -118,7 +118,7 @@ const gameTime = ref<number | undefined>(undefined);
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
 onMounted(() => {
-  if (typeof date.value === "string" && date.value !== '') {
+  if (typeof date.value === "string" && date.value !== "") {
     start.value = new Date(date.value as string).getTime();
     end.value = start.value + 2 * 24 * 60 * 60 * 1000;
   }

@@ -44,7 +44,9 @@
         <button type="submit">{{ t("submit") }}</button>
         <div class="intro__quick-actions">
           <button type="button" @click="useToday">{{ t("today") }}</button>
-          <button type="button" @click="useYesterday">{{ t("yesterday") }}</button>
+          <button type="button" @click="useYesterday">
+            {{ t("yesterday") }}
+          </button>
         </div>
       </form>
     </div>
@@ -53,71 +55,71 @@
 
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 
 const date = useCookie("start_date", {
-  sameSite: 'strict',
+  sameSite: "strict",
   maxAge: 60 * 60 * 24 * 7,
 });
 
-if (typeof date.value === 'string' && date.value !== '') {
-  useRouter().push({ path: localePath('/clock') });
+if (typeof date.value === "string" && date.value !== "") {
+  useRouter().push({ path: localePath("/clock") });
 }
 
 function useToday() {
-  date.value = new Date().toISOString().split('T')[0];
+  date.value = new Date().toISOString().split("T")[0];
 }
 
 function useYesterday() {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  date.value = yesterday.toISOString().split('T')[0];
+  date.value = yesterday.toISOString().split("T")[0];
 }
 
 function onSubmit() {
   if (date.value) {
-    useRouter().push({ path: localePath('/clock') });
+    useRouter().push({ path: localePath("/clock") });
   }
 }
 </script>
 
 <i18n lang="yaml">
-  en:
-    intro-1: "Hello stranger."
-    scroll: "Don't be shy, scroll."
-    intro-2: "How much time do you have? Such a simple question ..."
-    intro-3: "See, we all have a fixed amount of time in this world."
-    intro-4: "No one knows how much they have."
-    intro-5: "And the universe doesn't owe you any more if you waste it."
-    intro-6: "So you can spend your days watching the sun and the moon dance."
-    intro-7: "Or ... every once in a while ..."
-    intro-8: "... you can sneak an extra day into your life."
-    intro-9: "And in two days live three."
-    intro-10: "Use them wisely."
-    welcome: "Welcome to"
-    3-in-2: "3 in 2"
-    label: "Please set your start date, now."
-    submit: "Set start date"
-    today: "Today"
-    yesterday: "Yesterday"
-  de:
-    intro-1: "Hallo."
-    scroll: "Sei nicht schüchtern, scrolle."
-    intro-2: "Wie viel Zeit hast du? So eine einfache Frage ..."
-    intro-3: "Wir alle haben eine endliche Menge Zeit in dieser Welt."
-    intro-4: "Niemand weiß, wie viel uns bleibt."
-    intro-5: "Und das Universum schuldet dir keine Sekunde mehr, wenn du sie verschwendest."
-    intro-6: "Du kannst deine Tage damit verbringen, dem Lauf von Sonne und Mond zu folgen."
-    intro-7: "Oder ... ab und zu ..."
-    intro-8: "... kannst du dir einen zusätzlichen Tag erspielen."
-    intro-9: "Und in zwei Tagen drei erleben."
-    intro-10: "Nutze sie weise."
-    welcome: "Willkommen bei"
-    3-in-2: "3 in 2"
-    label: "Bitte setze dein Start-Datum, jetzt."
-    submit: "Start-Datum setzen"
-    today: "Heute"
-    yesterday: "Gestern"
+en:
+  intro-1: "Hello stranger."
+  scroll: "Don't be shy, scroll."
+  intro-2: "How much time do you have? Such a simple question ..."
+  intro-3: "See, we all have a fixed amount of time in this world."
+  intro-4: "No one knows how much they have."
+  intro-5: "And the universe doesn't owe you any more if you waste it."
+  intro-6: "So you can spend your days watching the sun and the moon dance."
+  intro-7: "Or ... every once in a while ..."
+  intro-8: "... you can sneak an extra day into your life."
+  intro-9: "And in two days live three."
+  intro-10: "Use them wisely."
+  welcome: "Welcome to"
+  3-in-2: "3 in 2"
+  label: "Please set your start date, now."
+  submit: "Set start date"
+  today: "Today"
+  yesterday: "Yesterday"
+de:
+  intro-1: "Hallo."
+  scroll: "Sei nicht schüchtern, scrolle."
+  intro-2: "Wie viel Zeit hast du? So eine einfache Frage ..."
+  intro-3: "Wir alle haben eine endliche Menge Zeit in dieser Welt."
+  intro-4: "Niemand weiß, wie viel uns bleibt."
+  intro-5: "Und das Universum schuldet dir keine Sekunde mehr, wenn du sie verschwendest."
+  intro-6: "Du kannst deine Tage damit verbringen, dem Lauf von Sonne und Mond zu folgen."
+  intro-7: "Oder ... ab und zu ..."
+  intro-8: "... kannst du dir einen zusätzlichen Tag erspielen."
+  intro-9: "Und in zwei Tagen drei erleben."
+  intro-10: "Nutze sie weise."
+  welcome: "Willkommen bei"
+  3-in-2: "3 in 2"
+  label: "Bitte setze dein Start-Datum, jetzt."
+  submit: "Start-Datum setzen"
+  today: "Heute"
+  yesterday: "Gestern"
 </i18n>
 
 <style lang="scss">
@@ -191,18 +193,28 @@ function onSubmit() {
 }
 
 @keyframes flicker {
-	0%, 19%, 22%, 62%, 64%, 70%, 100% {
-		opacity: 0.99;
-		text-shadow:
-			0 -0.05em 0.15em rgba(255, 255, 255, 0.75),
-			0 0 0.1em rgba(255, 255, 255, 0.1),
-			0 0 0.5em rgba(255, 255, 255, 0.1),
-			0 0 0.1em #619fbe,
-			0 0 2px #000;
-	}
-	20%, 21%, 63%, 65%, 69.9% {
-		opacity: 0.4;
-		text-shadow: none;
-	}
+  0%,
+  19%,
+  22%,
+  62%,
+  64%,
+  70%,
+  100% {
+    opacity: 0.99;
+    text-shadow:
+      0 -0.05em 0.15em rgba(255, 255, 255, 0.75),
+      0 0 0.1em rgba(255, 255, 255, 0.1),
+      0 0 0.5em rgba(255, 255, 255, 0.1),
+      0 0 0.1em #619fbe,
+      0 0 2px #000;
+  }
+  20%,
+  21%,
+  63%,
+  65%,
+  69.9% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
 }
 </style>

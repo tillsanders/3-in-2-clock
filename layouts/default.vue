@@ -140,7 +140,7 @@ form button {
   padding: 0.75rem;
   margin: 1rem 0;
   border: none;
-  background: #FFF;
+  background: #fff;
   color: #000;
   font-weight: 100;
   font-size: 4vmin;

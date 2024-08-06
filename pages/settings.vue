@@ -13,15 +13,15 @@
 
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const date = useCookie("start_date", {
-  sameSite: 'strict',
+  sameSite: "strict",
   maxAge: 60 * 60 * 24 * 7,
 });
 
 function unset() {
   date.value = "";
-  useRouter().push({ path: localePath('/') });
+  useRouter().push({ path: localePath("/") });
 }
 </script>
 
