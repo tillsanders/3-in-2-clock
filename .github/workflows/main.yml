@@ -58,4 +58,4 @@ jobs:
           build_dir: dist
           fqdn: 3-in-2.com
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
