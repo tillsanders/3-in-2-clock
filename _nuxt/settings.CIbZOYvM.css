@@ -1,0 +1,1 @@
+.settings{display:flex;flex-direction:column;justify-content:space-around;min-height:90vh;min-height:90dvh;text-align:center}.settings__actions{bottom:30vh;left:0;position:fixed;right:0;text-align:center}.settings__actions button{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:transparent;border:0;color:red;font-size:4vmin;padding:1rem}

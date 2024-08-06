@@ -1,0 +1,1 @@
+import{r,A as o}from"./o4vlsNfS.js";function n(){const a=r("");o(a,e=>{window.localStorage.setItem("startDate",e)});const t=window.localStorage.getItem("startDate");return t&&typeof t=="string"&&t.length>0&&(a.value=t),{startDate:a}}export{n as u};
