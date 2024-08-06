@@ -65,7 +65,10 @@
       <div class="clock__empty">
         {{ t("3-in-2") }}
         <p>
-          {{ t("introduction-1") }}<br />
+          <i18n-t keypath="introduction-1" tag="span" for="settings">
+            <a :href="localePath('settings')">{{ t("settings") }}</a>
+          </i18n-t>
+          <br />
           <br />
           {{ t("introduction-2") }}
         </p>
@@ -76,6 +79,7 @@
 
 <script lang="ts" setup>
 const { t } = useI18n({ useScope: "local" });
+const localePath = useLocalePath();
 
 const date = useCookie("start_date", {
   sameSite: "strict",
@@ -170,7 +174,8 @@ function format(time: number): string {
 <i18n lang="yaml">
 en:
   3-in-2: "3 in 2"
-  introduction-1: "Set your start date in the settings and then use the clock to pretend there are 72 hours in 48 or 3 days in 2."
+  introduction-1: "Set your start date in the {0} and then use the clock to pretend there are 72 hours in 48 or 3 days in 2."
+  settings: "settings"
   introduction-2: "Sneak an extra day into your life. Use it wisely."
   toggle-realtime-clock: "Show real time"
   day: "Day"
@@ -178,7 +183,8 @@ en:
   end: "END"
 de:
   3-in-2: "3 in 2"
-  introduction-1: "Setzt euer Start-Datum in den Einstellungen und beobachtet, wie die Uhr schneller läuft damit ihr 72 Stunden in 48 echten Stunden erleben könnt, oder 3 Tage in 2."
+  introduction-1: "Setzt euer Start-Datum in den {0} und beobachtet, wie die Uhr schneller läuft damit ihr 72 Stunden in 48 echten Stunden erleben könnt, oder 3 Tage in 2."
+  settings: Einstellungen
   introduction-2: "Verschafft euch einen Extra-Tag. Nutzt ihn weise."
   toggle-realtime-clock: "Zeige echte Zeit"
   day: "Tag"
