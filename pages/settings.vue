@@ -1,6 +1,7 @@
 <template>
   <div class="settings">
     <form @submit.prevent="onSubmit">
+      <label>{{ t("label") }}</label>
       <input v-model="date" type="date" />
       <button type="submit" :disabled="typeof date !== 'string' || date === ''">
         {{ t("submit") }}
@@ -35,9 +36,11 @@ function unset() {
 
 <i18n lang="yaml">
 en:
+  label: "Start date"
   submit: "Okay"
   unset: "Unset start-date."
 de:
+  label: "Start-Datum"
   submit: "Okay"
   unset: "Start-Datum leeren."
 </i18n>
