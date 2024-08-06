@@ -39,6 +39,8 @@
       <slot />
 
       <div id="smallprint">
+        <NuxtLink :to="localePath('/clock')">{{ t("links.clock") }}</NuxtLink>
+        <NuxtLink :to="localePath('/help')">{{ t("links.help") }}</NuxtLink>
         <NuxtLink v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')"
           >EN</NuxtLink
         >
@@ -85,6 +87,8 @@ en:
     calculator: "Calculator"
     close: "Close"
   links:
+    clock: "Clock"
+    help: "Help"
     stats: "Stats"
     privacy: "Privacy"
     about: "Site Notice"
@@ -96,6 +100,8 @@ de:
     calculator: "Umrechnung"
     close: "Schließen"
   links:
+    clock: "Uhr"
+    help: "Hilfe"
     stats: "Stats"
     privacy: "Datenschutz"
     about: "Impressum"
@@ -127,7 +133,6 @@ select {
   color: #fff;
   font-weight: 100;
   font-size: 4vmin;
-  border-radius: 0;
   appearance: none;
   min-height: 1.4em;
   border-radius: 4px;
@@ -144,11 +149,16 @@ form button {
   color: #000;
   font-weight: 100;
   font-size: 4vmin;
-  border-radius: 0;
   appearance: none;
   min-height: 1.4em;
   border-radius: 4px;
   cursor: pointer;
+
+  &:disabled {
+    background: #777;
+    color: #333;
+    cursor: not-allowed;
+  }
 }
 
 select {
@@ -184,6 +194,10 @@ a {
   text-decoration: none;
 }
 
+p a {
+  border-bottom: 2px solid #777;
+}
+
 #settings-link {
   position: fixed;
   top: 0;
@@ -208,6 +222,7 @@ a {
   right: 0;
   color: #555;
   padding: 0.5rem;
+  background: #000;
 
   a {
     display: inline-block;
