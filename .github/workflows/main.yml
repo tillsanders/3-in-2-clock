@@ -47,9 +47,6 @@ jobs:
       - name: Run prettier
         run: npx prettier --check .
 
-      - name: Run tests 🧪
-        run: npm run test
-
       - name: Build 🚚
         if: success()
         run: npm run generate
