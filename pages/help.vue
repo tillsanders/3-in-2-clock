@@ -7,6 +7,7 @@
     <p>{{ t("realtime") }}</p>
     <p>{{ t("calculator") }}</p>
     <p>{{ t("tipp") }}</p>
+    <p>{{ t("homescreen") }}</p>
     <p>{{ t("safety") }}</p>
     <NuxtLink :to="localePath('/clock')">
       {{ t("back") }}
@@ -28,6 +29,7 @@ en:
   realtime: "If you want to see the real time in addition to the playing time, you can show and hide the real-time clock by clicking on the eye symbol."
   calculator: "The calculator symbol can be used to convert the current playing time into real time. The calculation can be reversed by clicking on the arrow symbols between the input fields."
   tipp: "Tip: The game is most fun when the real time is forgotten and only the game time is used for orientation. The best way to do this is to take all the real clocks off the walls and voluntarily collect mobile phones or stick clocks on them."
+  homescreen: "Tip: Add this website to your home screen to access it conveniently and use it like an app."
   safety: "Safety: The game is not suitable for children, as it is also easy for young people and adults to become overtired. All participants should feel safe and comfortable at all times. It is advisable to encourage participants to take breaks and look after themselves and others."
   back: "Back"
 de:
@@ -38,6 +40,7 @@ de:
   realtime: "Möchte man zusätzlich zur Spielzeit auch die echte Zeit sehen, kann die Echtzeit-Uhr mit einem Klick auf das Augen-Symbol ein- und ausgeblendet werden."
   calculator: "Über das Taschenrechner-Symbol kann die aktuelle Spielzeit in echte Zeit umgerechnet werden. Mit einem Klick auf die Pfeil-Symbole zwischen den Eingabefeldern kann die Berechnung umgekehrt werden."
   tipp: "Tipp: Das Spiel macht am meisten Spaß, wenn die echte Zeit vergessen wird und nur die Spielzeit zur Orientierung dient. Dazu nimmt man am besten alle echten Uhren von den Wänden und sammelt Handys freiwillig ein oder klebt Uhren ab."
+  homescreen: "Tipp: Füge diese Website deinem Startbildschirm hinzu, um sie bequem zu erreichen und wie eine App verwenden zu können."
   safety: "Sicherheit: Das Spiel ist nicht für Kinder geeignet, da es auch bei Jugendlichen und Erwachsenen leicht zur Übermüdung kommt. Alle Teilnehmenden sollten sich jederzeit sicher und wohl fühlen. Es ist ratsam, die Teilnehmenden zu ermutigen, Pausen zu machen und auf sich selbst und andere zu achten."
   back: "Zurück"
 </i18n>
