@@ -52,6 +52,9 @@
           <button type="button" @click="useYesterday">
             {{ t("yesterday") }}
           </button>
+          <button type="button" @click="useTomorrow">
+            {{ t("tomorrow") }}
+          </button>
         </div>
       </form>
     </div>
@@ -76,6 +79,12 @@ function useYesterday() {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   date.value = yesterday.toISOString().split("T")[0];
+}
+
+function useTomorrow() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  date.value = tomorrow.toISOString().split("T")[0];
 }
 
 function onSubmit() {
@@ -104,6 +113,7 @@ en:
   submit: "Set start date"
   today: "Today"
   yesterday: "Yesterday"
+  tomorrow: "Tomorrow"
 de:
   intro-1: "Hallo."
   scroll: "Sei nicht schüchtern, scrolle."
@@ -122,6 +132,7 @@ de:
   submit: "Start-Datum setzen"
   today: "Heute"
   yesterday: "Gestern"
+  tomorrow: "Morgen"
 </i18n>
 
 <style lang="scss">
