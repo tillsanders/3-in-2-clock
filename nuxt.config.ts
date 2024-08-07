@@ -18,8 +18,20 @@ export default defineNuxtConfig({
             "Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.",
         },
         { name: "format-detection", content: "telephone=no" },
+        { name: "msapplication-TileColor", content: "#000000" },
+        { name: "theme-color", content: "#000000" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black" },
+        { name: "apple-mobile-web-app-title", content: "3 in 2" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "apple-touch-icon",
+          type: "image/png",
+          href: "/apple-touch-icon.png",
+        },
+      ],
     },
   },
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
@@ -50,7 +62,25 @@ export default defineNuxtConfig({
       short_name: "3 in 2",
       description:
         "Use this clock to pretend there are 72 hours in 48 or 3 days in 2. Sneak an extra day into your life. Use it wisely.",
-      theme_color: "#ffffff",
+      theme_color: "#000000000",
+      icons: [
+        {
+          src: "pwa-192x192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "pwa-512x512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+        {
+          src: "pwa-512x512.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any maskable",
+        },
+      ],
     },
   },
   plausible: {
