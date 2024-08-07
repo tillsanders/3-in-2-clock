@@ -16,9 +16,9 @@
           {{ t("day") }}&nbsp;{{ days(gameTime) + 1 }},&nbsp;
         </div>
         <div class="clock__hours_minutes">
-          {{ format(hours(gameTime)) }}:{{ format(minutes(gameTime)) }}
+          {{ formatTime(hours(gameTime)) }}:{{ formatTime(minutes(gameTime)) }}
         </div>
-        <div class="clock__seconds">:{{ format(seconds(gameTime)) }}</div>
+        <div class="clock__seconds">:{{ formatTime(seconds(gameTime)) }}</div>
       </div>
       <button
         class="clock__realtime_toggle"
@@ -45,25 +45,31 @@
             {{ t("day") }}&nbsp;{{ days(realTime) + 1 }},&nbsp;
           </div>
           <div class="clock__hours_minutes">
-            {{ format(hours(realTime)) }}:{{ format(minutes(realTime)) }}
+            {{ formatTime(hours(realTime)) }}:{{
+              formatTime(minutes(realTime))
+            }}
           </div>
-          <div class="clock__seconds">:{{ format(seconds(realTime)) }}</div>
+          <div class="clock__seconds">:{{ formatTime(seconds(realTime)) }}</div>
         </div>
       </div>
     </template>
     <template v-else-if="start && currentTime && currentTime < start">
       <div class="clock__empty">
-        {{ t("ready") }}
+        <strong>{{ t("ready.heading") }}</strong>
+        <p>
+          {{ t("ready.description", { start: format(start, "dd.MM.yyyy") }) }}
+        </p>
       </div>
     </template>
     <template v-else-if="start && currentTime && end && currentTime > end">
       <div class="clock__empty">
-        {{ t("end") }}
+        <strong>{{ t("end.heading") }}</strong>
+        <p>{{ t("end.description") }}</p>
       </div>
     </template>
     <template v-else>
       <div class="clock__empty">
-        {{ t("3-in-2") }}
+        <strong>{{ t("3-in-2") }}</strong>
         <p>
           <i18n-t keypath="introduction-1" tag="span" for="settings">
             <a :href="localePath('settings')">{{ t("settings") }}</a>
@@ -78,6 +84,7 @@
 </template>
 
 <script lang="ts" setup>
+import { format } from "date-fns";
 const { t } = useI18n({ useScope: "local" });
 const localePath = useLocalePath();
 
@@ -160,7 +167,7 @@ function seconds(timestamp: number): number {
   );
 }
 
-function format(time: number): string {
+function formatTime(time: number): string {
   if (time < 10) {
     return `0${time}`;
   }
@@ -176,8 +183,12 @@ en:
   introduction-2: "Sneak an extra day into your life. Use it wisely."
   toggle-realtime-clock: "Show real time"
   day: "Day"
-  ready: "READY"
-  end: "END"
+  ready:
+    heading: "Ready"
+    description: "You are ready for the game. The clock will start at {start} at midnight."
+  end:
+    heading: "End"
+    description: "The game is over. Set a new start date in the settings to start a new round."
 de:
   3-in-2: "3 in 2"
   introduction-1: "Setzt euer Start-Datum in den {0} und beobachtet, wie die Uhr schneller läuft damit ihr 72 Stunden in 48 echten Stunden erleben könnt, oder 3 Tage in 2."
@@ -185,8 +196,12 @@ de:
   introduction-2: "Verschafft euch einen Extra-Tag. Nutzt ihn weise."
   toggle-realtime-clock: "Zeige echte Zeit"
   day: "Tag"
-  ready: "BEREIT"
-  end: "ENDE"
+  ready:
+    heading: "Bereit"
+    description: "Du bist bereit für das Spiel. Die Uhr wird angezeigt ab dem {start} um 0 Uhr."
+  end:
+    heading: "Ende"
+    description: "Das Spiel ist vorbei. Stelle ein neues Start-Datum in den Einstellungen ein, um eine neue Runde zu starten."
 </i18n>
 
 <style lang="scss">
@@ -201,11 +216,15 @@ de:
 
 .clock__gametime,
 .clock__empty {
-  font-size: 7vmin;
   text-align: center;
   position: relative;
   display: inline-block;
   margin: 0 auto;
+}
+
+.clock__gametime,
+.clock__empty strong {
+  font-size: 7vmin;
 }
 
 .clock__empty p {
